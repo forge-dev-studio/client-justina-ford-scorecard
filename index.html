@@ -143,6 +143,27 @@ table.kw tr:last-child td{border-bottom:none}
 .win .t{font-weight:600;font-size:15px;line-height:1.34}
 .win .d{color:var(--ink-2);font-size:13.6px;line-height:1.5}
 
+/* two-route close */
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:860px){.routes{grid-template-columns:1fr}}
+.route{background:var(--card);border:1px solid var(--rule);border-top:4px solid var(--rc);
+  border-radius:5px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.route .rtop{padding:19px 22px 15px;border-bottom:1px solid var(--rule-2)}
+.route .rtag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--rc)}
+.route h3{font-family:Georgia,serif;margin:6px 0 6px;font-size:20px;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+.route .rsub{margin:0;color:var(--ink-2);font-size:14.4px}
+.route ol{margin:0;padding:6px 22px 20px 22px;list-style:none;counter-reset:r;
+  display:flex;flex-direction:column;gap:13px;flex:1}
+.route li{counter-increment:r;display:flex;gap:12px;align-items:flex-start}
+.route li::before{content:counter(r);flex:none;width:24px;height:24px;border-radius:50%;
+  background:var(--rcbg);color:var(--rc);display:grid;place-items:center;
+  font-family:Georgia,serif;font-weight:700;font-size:13px;margin-top:1px}
+.route li .rt{font-weight:650;font-size:15px;line-height:1.34;margin:0 0 2px}
+.route li .rd{color:var(--ink-2);font-size:14px;line-height:1.5;margin:0}
+.route .rfoot{margin:auto 22px 20px;background:var(--rcbg);border-radius:4px;padding:12px 14px;
+  font-size:14px;color:var(--ink)}
+.route .rfoot b{color:var(--rc)}
+
 /* next */
 .steps{display:flex;flex-direction:column;gap:11px;counter-reset:s}
 .step{background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:17px 20px;
@@ -680,15 +701,50 @@ a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   <!-- NEXT -->
   <section>
     <div class="shead">
-      <h2>What we would do next</h2>
-      <span class="note">In this order</span>
+      <h2>What happens next, two ways</h2>
+      <span class="note">Your call</span>
     </div>
-    <p class="intro">Sequenced by what each step depends on, not by how quick it is.</p>
-    <div class="steps">
-      <div class="step"><div><p class="sc-t">Turn measurement on and secure the basics</p><p>Connect analytics so every change after this can be judged on results rather than opinion, fix the email records so your list reaches the inbox, and close the file and account exposure.</p></div></div>
-      <div class="step"><div><p class="sc-t">Make the site fast and stable on a phone</p><p>Address the image weight and the layout jumping, which together account for the two worst scores in this report and affect every visitor you have.</p></div></div>
-      <div class="step"><div><p class="sc-t">Reconnect the site to itself and decide what stays</p><p>Bring the orphaned pages, the contact page and the podcast page back into the structure, and settle what happens to the 187 pages from the beauty agency era.</p></div></div>
-      <div class="step"><div><p class="sc-t">Pick the ground you can win and claim your authority</p><p>Settle how you want to handle a name that Google gives to someone else, build on the openings where your credentials and the search demand already line up, make your podcast and profiles readable by search engines, then re-run this exact report at 30, 60 and 90 days to show movement.</p></div></div>
+    <p class="intro">You do not need us to act on this report. So here are both routes honestly: the five
+      things we would tackle first if you are handling it yourself, and what it looks like if we take it
+      on instead.</p>
+
+    <div class="routes">
+
+      <article class="route" style="--rc:var(--gold-d);--rcbg:var(--s-mid-bg)">
+        <div class="rtop">
+          <span class="rtag">Route one</span>
+          <h3>If you are fixing this yourself</h3>
+          <p class="rsub">The five highest-value moves, in the order we would make them.</p>
+        </div>
+        <ol>
+          <li><div><p class="rt">Lock down your paid course content</p><p class="rd">This is first because it is costing you money today. Material people pay for can currently be read by anyone who finds the address. Nothing else on this list is as urgent.</p></div></li>
+          <li><div><p class="rt">Fix your email records</p><p class="rd">Your domain publishes two conflicting permission records where only one is allowed, so neither counts and mail providers treat the check as failed. Your list is your most valuable asset and this quietly erodes it every send.</p></div></li>
+          <li><div><p class="rt">Connect your analytics</p><p class="rd">The plugin is already installed, it just was never linked to a Google account. Until this is done, no change you make can be judged on results. Do it before anything in the next two steps so you can see what they achieve.</p></div></li>
+          <li><div><p class="rt">Repair your contact page</p><p class="rd">It carries no form, it points search engines at an old beauty agency page instead of itself, and the email address on it does not match the one on your account. That is the page where enquiries are supposed to land.</p></div></li>
+          <li><div><p class="rt">Compress your images</p><p class="rd">The tool for this is already installed on your site. Your images are full-size originals, one of them nearly 5 MB on its own, and they reload completely on every visit. This is the biggest speed gain available without rebuilding.</p></div></li>
+        </ol>
+        <div class="rfoot"><b>Be realistic about the ceiling.</b> These five make the site safer, measurable
+          and noticeably faster. They will not fix the structural problems, because those come from how the
+          site is built.</div>
+      </article>
+
+      <article class="route" style="--rc:var(--teal-d);--rcbg:var(--s-fair-bg)">
+        <div class="rtop">
+          <span class="rtag">Route two</span>
+          <h3>If we take it on</h3>
+          <p class="rsub">Everything in route one happens anyway, plus the work that route cannot reach.</p>
+        </div>
+        <ol>
+          <li><div><p class="rt">A new build</p><p class="rd">A fast, secure, mobile-first site carrying your real content across, with every page given a proper address, a clear heading and a route in. Green on Google's speed and stability measures because of how it is built, not because it was patched afterward.</p></div></li>
+          <li><div><p class="rt">Optimization</p><p class="rd">Speed, images, page weight and stability handled at the source. Your paid content properly protected behind the platform you already pay for, and the security findings in this report designed out rather than patched over.</p></div></li>
+          <li><div><p class="rt">SEO</p><p class="rd">The 540 pages nothing links to reconnected, the missing descriptions and headings written, your credentials and podcast made readable by both search engines and AI tools, and a focused push on the searches you are genuinely positioned to win.</p></div></li>
+          <li><div><p class="rt">Brand clarity</p><p class="rd">One business, one name, one story. We settle what happens to the 187 pages from the beauty agency era, resolve the four different business names currently in circulation, and deal with the fact that Google gives your own name to someone else.</p></div></li>
+          <li><div><p class="rt">Monthly design and build help, included</p><p class="rd">New pages, landing pages for launches, design changes and fixes as you need them, provided as part of your monthly service rather than quoted for one at a time. Plus reporting, so you can see what is working.</p></div></li>
+        </ol>
+        <div class="rfoot"><b>Where this ends up.</b> A site that is fast, findable, safe and measurable, and
+          a monthly partner so it stays that way while you get on with coaching.</div>
+      </article>
+
     </div>
   </section>
 
