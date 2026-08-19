@@ -1,0 +1,638 @@
+<title>Soulfully Aligned Website Scorecard</title>
+<style>
+:root{
+  --ground:#eef2f2; --card:#ffffff; --card-2:#f5f8f8;
+  --ink:#22302f; --ink-2:#5d6d6c; --ink-3:#8b9a99;
+  --rule:#dbe4e3; --rule-2:#e8eeee;
+  --teal:#3ba1a6; --teal-d:#2b787c; --gold:#caad42; --gold-d:#8d7620; --rose:#df587c; --rose-d:#b93a5c;
+  --s-low:#b93a5c; --s-mid:#8d7620; --s-fair:#2b787c; --s-high:#1d7a62;
+  --s-low-bg:#fbe9ee; --s-mid-bg:#f8f1dc; --s-fair-bg:#e2f0f0; --s-high-bg:#dff0ea;
+  --shadow:0 1px 2px rgba(34,48,47,.05),0 10px 30px -16px rgba(34,48,47,.22);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0f1817; --card:#182322; --card-2:#1e2b2a;
+    --ink:#e7edec; --ink-2:#9aacaa; --ink-3:#758785;
+    --rule:#2a3a38; --rule-2:#223130;
+    --teal:#5cc0c5; --teal-d:#7ad0d4; --gold:#d9bd54; --gold-d:#e0c76c; --rose:#ef7f9c; --rose-d:#f593ac;
+    --s-low:#f593ac; --s-mid:#e0c76c; --s-fair:#6cc7cc; --s-high:#54c3a1;
+    --s-low-bg:#2e161d; --s-mid-bg:#2b2412; --s-fair-bg:#123030; --s-high-bg:#0f2c24;
+    --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 30px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0f1817; --card:#182322; --card-2:#1e2b2a;
+  --ink:#e7edec; --ink-2:#9aacaa; --ink-3:#758785;
+  --rule:#2a3a38; --rule-2:#223130;
+  --teal:#5cc0c5; --teal-d:#7ad0d4; --gold:#d9bd54; --gold-d:#e0c76c; --rose:#ef7f9c; --rose-d:#f593ac;
+  --s-low:#f593ac; --s-mid:#e0c76c; --s-fair:#6cc7cc; --s-high:#54c3a1;
+  --s-low-bg:#2e161d; --s-mid-bg:#2b2412; --s-fair-bg:#123030; --s-high-bg:#0f2c24;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 30px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:16.5px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:Georgia,"Iowan Old Style","Times New Roman",serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+@media(max-width:600px){.wrap{padding:0 17px}}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* masthead */
+.mast{background:var(--card);border-bottom:1px solid var(--rule)}
+.mast-in{padding:44px 0 40px;display:flex;flex-direction:column;gap:30px}
+.brandline{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.brandline .mark{width:30px;height:30px;border-radius:50%;
+  background:conic-gradient(from 140deg,var(--teal),var(--gold),var(--rose),var(--teal));flex:none}
+.brandline .nm{font-family:Georgia,serif;font-size:19px;letter-spacing:.03em;font-weight:700}
+.brandline .sub{color:var(--ink-3);font-size:12px;letter-spacing:.19em;text-transform:uppercase;font-weight:600}
+.mast h1{font-family:Georgia,"Iowan Old Style",serif;font-weight:700;margin:0;
+  font-size:clamp(31px,5.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance;max-width:19ch}
+.lede{max-width:62ch;color:var(--ink-2);font-size:clamp(16px,2vw,18px);margin:0}
+
+/* overall */
+.overall{display:flex;gap:30px;align-items:center;flex-wrap:wrap;
+  background:var(--card-2);border:1px solid var(--rule);border-radius:5px;padding:26px 28px}
+.dial{flex:none;width:132px;height:132px;position:relative;display:grid;place-items:center}
+.dial svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.dial .val{font-family:Georgia,serif;font-size:41px;font-weight:700;line-height:1;color:var(--s-low);letter-spacing:-.02em}
+.dial .den{font-size:12.5px;color:var(--ink-3);letter-spacing:.09em;margin-top:3px;font-weight:600}
+.overall .txt{flex:1 1 340px;display:flex;flex-direction:column;gap:9px}
+.overall h2{font-family:Georgia,serif;margin:0;font-size:21px;font-weight:700;letter-spacing:-.01em}
+.overall p{margin:0;color:var(--ink-2);font-size:15.5px;max-width:60ch}
+.overall .band{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
+.bd{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:2px}
+
+/* section */
+section{padding:52px 0 4px}
+.shead{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;padding-bottom:12px;
+  border-bottom:2px solid var(--ink);margin-bottom:22px}
+.shead h2{font-family:Georgia,serif;margin:0;font-size:clamp(21px,2.9vw,27px);font-weight:700;letter-spacing:-.015em}
+.shead .note{color:var(--ink-3);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.intro{max-width:68ch;color:var(--ink-2);font-size:15.5px;margin:0 0 26px}
+
+/* area cards */
+.areas{display:flex;flex-direction:column;gap:13px}
+.area{background:var(--card);border:1px solid var(--rule);border-radius:5px;overflow:hidden;box-shadow:var(--shadow)}
+.ahead{display:flex;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--rule-2);flex-wrap:wrap}
+.score{flex:none;width:52px;height:52px;border-radius:5px;display:grid;place-items:center;
+  font-family:Georgia,serif;font-weight:700;font-size:22px;letter-spacing:-.02em;
+  color:var(--sc);background:var(--sc-bg);border:1px solid color-mix(in srgb,var(--sc) 26%,transparent)}
+.ahead .t{flex:1 1 220px;min-width:0}
+.ahead h3{margin:0;font-size:17.5px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.ahead .w{color:var(--ink-3);font-size:12px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;margin-top:3px}
+.bar{flex:1 1 170px;height:7px;background:var(--rule-2);border-radius:99px;overflow:hidden;min-width:120px}
+.bar i{display:block;height:100%;background:var(--sc);border-radius:99px}
+.abody{padding:5px 20px 18px}
+.parts{width:100%;border-collapse:collapse;font-size:14.7px}
+.parts tr{border-bottom:1px solid var(--rule-2)}
+.parts tr:last-child{border-bottom:none}
+.parts td{padding:11px 0;vertical-align:top}
+.parts td.p1{width:38%;font-weight:600;padding-right:16px}
+.parts td.p2{color:var(--ink-2);padding-right:16px}
+.parts td.p3{width:78px;text-align:right;white-space:nowrap}
+.chip{display:inline-block;font-weight:700;font-size:13px;padding:3px 10px;border-radius:3px;
+  color:var(--sc);background:var(--sc-bg);font-family:Georgia,serif}
+@media(max-width:640px){
+  .parts td.p1{width:auto;display:block;padding-bottom:2px}
+  .parts td.p2{display:block;padding-bottom:9px}
+  .parts td.p3{display:block;text-align:left;width:auto;padding:0 0 11px}
+}
+
+/* keyword table */
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:5px;background:var(--card);box-shadow:var(--shadow)}
+table.kw{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+table.kw th,table.kw td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--rule-2)}
+table.kw th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);
+  font-weight:700;background:var(--card-2);border-bottom:1px solid var(--rule)}
+table.kw td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+table.kw tr:last-child td{border-bottom:none}
+.tag{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:2px;white-space:nowrap}
+.t-gap{color:var(--s-low);background:var(--s-low-bg)}
+.t-lead{color:var(--s-high);background:var(--s-high-bg)}
+.t-par{color:var(--s-mid);background:var(--s-mid-bg)}
+
+/* wins */
+.wins{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+@media(max-width:840px){.wins{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.wins{grid-template-columns:1fr}}
+.win{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--s-high);
+  border-radius:4px;padding:15px 17px;display:flex;flex-direction:column;gap:5px}
+.win .t{font-weight:600;font-size:15px;line-height:1.34}
+.win .d{color:var(--ink-2);font-size:13.6px;line-height:1.5}
+
+/* next */
+.steps{display:flex;flex-direction:column;gap:11px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:17px 20px;
+  display:flex;gap:16px;align-items:flex-start}
+.step::before{counter-increment:s;content:counter(s);flex:none;width:31px;height:31px;border-radius:50%;
+  display:grid;place-items:center;background:var(--teal);color:#fff;font-family:Georgia,serif;
+  font-weight:700;font-size:15px}
+:root[data-theme="dark"] .step::before,
+:root:not([data-theme="light"]) .step::before{color:#0f1817}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .step::before{color:#fff}}
+.step .sc-t{font-weight:600;font-size:16px;margin:0 0 3px}
+.step p{margin:0;color:var(--ink-2);font-size:14.8px;max-width:70ch}
+
+footer{margin-top:54px;background:var(--card);border-top:1px solid var(--rule)}
+.fin{padding:28px 0 42px;display:flex;flex-direction:column;gap:12px}
+footer p{margin:0;color:var(--ink-2);font-size:13.4px;line-height:1.66;max-width:88ch}
+footer b{color:var(--ink)}
+.legend{display:flex;gap:15px;flex-wrap:wrap;padding-bottom:4px}
+.lg{display:flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.07em;
+  text-transform:uppercase;font-weight:700;color:var(--ink-2)}
+.sw{width:11px;height:11px;border-radius:2px}
+a{color:var(--teal-d)}
+a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+</style>
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <div class="brandline">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="nm">Justina Ford</span>
+      <span class="sub">Soulfully Aligned</span>
+    </div>
+    <h1>Your website, scored honestly</h1>
+    <p class="lede">A full review of justinaford.com covering the technical build, how search engines see
+      it, how it compares to the coaches ranking around you, and how well the site is set up to bring you
+      clients. Every area below is rated out of 10, and every number was measured directly from your live
+      site on 18 August 2026.</p>
+
+    <div class="overall">
+      <div class="dial">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--rule)" stroke-width="11"/>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--s-low)" stroke-width="11"
+                  stroke-linecap="round" stroke-dasharray="104.6 326.7"/>
+        </svg>
+        <div style="display:grid;place-items:center">
+          <span class="val serif tnum">3.2</span>
+          <span class="den">OUT OF 10</span>
+        </div>
+      </div>
+      <div class="txt">
+        <h2 class="serif">Strong content sitting on a foundation that is working against it</h2>
+        <p>The writing, the credentials and the podcast are genuinely good, and they are the hardest part
+          of this to build. What is holding the site back is almost entirely mechanical: it measures
+          nothing, it is slow and unstable on phones, and it hides most of its own pages from Google.
+          None of the ten areas below scored badly because of your content. The clearest evidence is in
+          the search data: your site currently ranks for <b>24 keywords in total</b>, none of them in the
+          top three, and it does not appear in the top 20 for a single one of the terms a client would
+          type to find a coach.</p>
+        <div class="band">
+          <span class="bd" style="color:var(--s-low);background:var(--s-low-bg)">4 areas at 3 or below</span>
+          <span class="bd" style="color:var(--s-mid);background:var(--s-mid-bg)">5 areas at 4</span>
+          <span class="bd" style="color:var(--s-high);background:var(--s-high-bg)">11 things already working</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="shead">
+      <h2>The ten areas, rated</h2>
+      <span class="note">Weighted by effect on enquiries</span>
+    </div>
+    <p class="intro">Each area carries its own weight in the overall score, shown beside the heading. An
+      area is rated on the parts underneath it, so you can see exactly which piece pulled a number up or
+      down rather than taking the headline on trust.</p>
+
+    <div class="areas">
+
+      <!-- 1 -->
+      <article class="area" style="--sc:var(--s-low);--sc-bg:var(--s-low-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">1.0</div>
+          <div class="t"><h3>Knowing what your website is doing</h3><div class="w">15% of overall score</div></div>
+          <div class="bar"><i style="width:10%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Visitor tracking</td><td class="p2">The analytics plugin is installed but was never connected to a Google Analytics account. The site currently records nothing at all.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Knowing what converts</td><td class="p2">With no analytics running, there is no way to tell which pages, posts or podcast episodes lead to a booking, or which do nothing.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Reaching visitors again</td><td class="p2">No Facebook or Instagram pixel is installed, so someone who visits and leaves cannot be shown your ads afterward.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="area" style="--sc:var(--s-low);--sc-bg:var(--s-low-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">2.5</div>
+          <div class="t"><h3>Speed and the experience on a phone</h3><div class="w">15% of overall score</div></div>
+          <div class="bar"><i style="width:25%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Page stability on mobile</td><td class="p2">Content jumps around while the homepage loads, by more than a full screen height. Google measures this and your score is roughly four times its failing line.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Loading speed on mobile</td><td class="p2">The main homepage image takes 4.7 seconds to appear on a normal phone connection. Google treats anything past 4 seconds as a fail.</td><td class="p3"><span class="chip tnum">3</span></td></tr>
+            <tr><td class="p1">Page weight</td><td class="p2">Your blog page downloads 41.6 MB. A well built page of that kind is usually under 2 MB. On phone data that is slow and expensive for the visitor.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Image handling</td><td class="p2">Images are full-size originals, one of them 4.85 MB on its own, in an older format, and they are re-downloaded from scratch on every visit rather than being remembered.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Pinch to zoom</td><td class="p2">The site actively prevents visitors from zooming in on a phone. That is a recognized accessibility failure and it affects any reader who needs larger text.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Server response</td><td class="p2">Genuinely good. Your caching is working and the server answers in about 0.2 seconds once warm.</td><td class="p3"><span class="chip tnum">8</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="area" style="--sc:var(--s-mid);--sc-bg:var(--s-mid-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">4.4</div>
+          <div class="t"><h3>Whether Google can find your pages</h3><div class="w">15% of overall score</div></div>
+          <div class="bar"><i style="width:44%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Links between your own pages</td><td class="p2">540 of your 682 pages have nothing on the site linking to them. Google reads that as a signal that you do not consider those pages important.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Finding your key pages</td><td class="p2">Your contact page, shop, free resources page and podcast page cannot be reached by clicking through the site, and are missing from the list you give Google.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Page health</td><td class="p2">Excellent. All 682 pages load correctly. There is not one broken link or error page anywhere in the list submitted to Google.</td><td class="p3"><span class="chip tnum">9</span></td></tr>
+            <tr><td class="p1">Crawl instructions</td><td class="p2">Your instructions file blocks nothing, so search engines are free to spend time on your cart, checkout, account and course pages instead of the pages you want found.</td><td class="p3"><span class="chip tnum">4</span></td></tr>
+            <tr><td class="p1">Duplicate address handling</td><td class="p2">Set up correctly across the site, with one exception: your contact page tells Google to credit an old beauty agency page instead of itself.</td><td class="p3"><span class="chip tnum">7</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="area" style="--sc:var(--s-low);--sc-bg:var(--s-low-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">3.4</div>
+          <div class="t"><h3>How your pages appear in search results</h3><div class="w">10% of overall score</div></div>
+          <div class="bar"><i style="width:34%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Page titles</td><td class="p2">Present everywhere, which is good, but 94 are too long to display fully and 112 are so short they say little. Sixteen pages share a title with another page.</td><td class="p3"><span class="chip tnum">5</span></td></tr>
+            <tr><td class="p1">Search descriptions</td><td class="p2">622 of 682 pages have no description written, so Google picks its own text for the listing. That is the sentence deciding whether someone clicks you or a competitor.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Headings</td><td class="p2">277 pages have no main heading at all, and 210 have several competing ones. Your homepage has five. It is the clearest signal of what a page is about.</td><td class="p3"><span class="chip tnum">2</span></td></tr>
+            <tr><td class="p1">Image descriptions</td><td class="p2">2,359 of your 3,772 images have no description. Your main homepage headline is inside a picture with no text alternative, so search engines cannot read it.</td><td class="p3"><span class="chip tnum">3</span></td></tr>
+            <tr><td class="p1">Depth of content</td><td class="p2">227 pages run past 800 words and are genuinely substantial. Against that, 110 pages carry under 50 words, mostly old portfolio entries.</td><td class="p3"><span class="chip tnum">6</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="area" style="--sc:var(--s-low);--sc-bg:var(--s-low-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">3.8</div>
+          <div class="t"><h3>Whether clients can actually find you</h3><div class="w">15% of overall score</div></div>
+          <div class="bar"><i style="width:38%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Visibility for hiring terms</td><td class="p2">Across the seven terms carrying real search demand in your field, your site appears in the top 20 for none of them. That is 0 of 5,500 monthly searches.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Total search footprint</td><td class="p2">Your site ranks for 24 keywords in the United States. None sit in the top three. Together they are worth roughly 73 visits a month.</td><td class="p3"><span class="chip tnum">2</span></td></tr>
+            <tr><td class="p1">Buying-intent wording</td><td class="p2">The phrases people type when ready to hire are thin on your pages, and direct invitations such as "book a call" do not appear in your page copy at all.</td><td class="p3"><span class="chip tnum">2</span></td></tr>
+            <tr><td class="p1">What makes you different</td><td class="p2">Genuinely strong. Your writing out-covers the whole comparison field on faith language, money mindset and inner-healing themes. That distinctiveness is real.</td><td class="p3"><span class="chip tnum">8</span></td></tr>
+            <tr><td class="p1">A winnable opening</td><td class="p2">"Splankna" draws 1,300 searches a month, you are certified in it, you already rank 31st, and the current top ten is mostly small independent sites.</td><td class="p3"><span class="chip tnum">7</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="area" style="--sc:var(--s-mid);--sc-bg:var(--s-mid-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">3.5</div>
+          <div class="t"><h3>Security and protection</h3><div class="w">10% of overall score</div></div>
+          <div class="bar"><i style="width:35%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">File privacy</td><td class="p2">Parts of your site's internal file structure are not locked down the way they should be. We have sent you the specifics privately rather than describing them on a public page.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Account privacy</td><td class="p2">Your site gives away more about its administrator accounts than it needs to. Again, the detail is in the private notes rather than here.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Access control</td><td class="p2">Some material that should sit behind a login does not. This one has a direct revenue impact and is covered in the private notes.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Protective settings</td><td class="p2">None of the six standard browser protections are switched on. They are all free and part of normal configuration.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Software updates</td><td class="p2">WordPress itself is fully up to date, which is genuinely well managed. Your theme is three years behind.</td><td class="p3"><span class="chip tnum">9</span></td></tr>
+            <tr><td class="p1">Secure connection</td><td class="p2">Correct. The padlock works, the certificate is valid and current, and visitors are always sent to the secure version.</td><td class="p3"><span class="chip tnum">8</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="area" style="--sc:var(--s-mid);--sc-bg:var(--s-mid-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">3.4</div>
+          <div class="t"><h3>Brand clarity across the site</h3><div class="w">5% of overall score</div></div>
+          <div class="bar"><i style="width:34%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Owning your own name</td><td class="p2">"Justina Ford" is searched 480 times a month, and all ten results belong to Dr. Justina Ford, the Denver physician and historical figure. Your site is not in the top 20 for your own name.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">One clear business</td><td class="p2">187 pages still belong to the makeup and beauty agency era, and your menu links to that work from every page. "Makeup artist" appears on 674 pages; "brand strategy" appears on 6.</td><td class="p3"><span class="chip tnum">2</span></td></tr>
+            <tr><td class="p1">Copy accuracy</td><td class="p2">Two misspellings sit on pages that sell, one of them above the fold on the homepage and one repeated on your Work With Me page.</td><td class="p3"><span class="chip tnum">3</span></td></tr>
+            <tr><td class="p1">Quality of the real content</td><td class="p2">Strong. The blog is substantial, distinctive and clearly in your own voice. It is the most valuable asset on the domain.</td><td class="p3"><span class="chip tnum">8</span></td></tr>
+            <tr><td class="p1">Page cleanliness</td><td class="p2">The most repeated phrase across your entire website is "pin pinterest", from a sharing plugin. It appears more often than your own name or the words "business coach".</td><td class="p3"><span class="chip tnum">3</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="area" style="--sc:var(--s-low);--sc-bg:var(--s-low-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">2.6</div>
+          <div class="t"><h3>How search engines understand who you are</h3><div class="w">5% of overall score</div></div>
+          <div class="bar"><i style="width:26%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Your professional profile</td><td class="p2">The site tells Google your name and nothing else. No job title, no description, no field of work.</td><td class="p3"><span class="chip tnum">2</span></td></tr>
+            <tr><td class="p1">Your business profile</td><td class="p2">There is no business listing information on the site at all, in the format search engines read.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Connections to your other profiles</td><td class="p2">Nothing links your website to your LinkedIn, your podcast or your author profile in a way Google can verify. These are separate identities to them right now.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Your qualifications</td><td class="p2">Your master's degree, Cornell certificate, practitioner certifications and bestselling author status appear in your writing but are invisible as verifiable facts.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Basic site information</td><td class="p2">The groundwork is correctly in place on all 682 pages, including navigation breadcrumbs and site details.</td><td class="p3"><span class="chip tnum">8</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 9 -->
+      <article class="area" style="--sc:var(--s-mid);--sc-bg:var(--s-mid-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">3.5</div>
+          <div class="t"><h3>Your presence beyond the website</h3><div class="w">5% of overall score</div></div>
+          <div class="bar"><i style="width:35%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Credit for what you have earned</td><td class="p2">Not one of your credentials links back to your site. Nothing from HuffPost, Amazon, Apple Podcasts, Spotify, Podchaser, LinkedIn or the Splankna Institute appears among the 57 sites linking to you.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">The podcast itself</td><td class="p2">A real asset, and an active one. 85 episodes, live on Apple, Spotify and Podchaser in both the US and Canadian stores, with a new episode published on 17 August 2026.</td><td class="p3"><span class="chip tnum">8</span></td></tr>
+            <tr><td class="p1">Website to podcast connection</td><td class="p2">Across all 682 pages, one links to Apple Podcasts and none link to Spotify. The podcast page itself is missing from search entirely.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Social profile links</td><td class="p2">Every page points to your Facebook group and nothing else. Your LinkedIn, which ranks well for your name, is not linked from the site at all.</td><td class="p3"><span class="chip tnum">2</span></td></tr>
+            <tr><td class="p1">Credentials and authority</td><td class="p2">Real and unusually strong for this field. Master's degree, Cornell certification, two practitioner certifications and a number one Amazon bestseller.</td><td class="p3"><span class="chip tnum">8</span></td></tr>
+            <tr><td class="p1">Client proof on the pages</td><td class="p2">Testimonial and results language is absent from the pages that sell, while competitors use it prominently.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- 10 -->
+      <article class="area" style="--sc:var(--s-low);--sc-bg:var(--s-low-bg)">
+        <div class="ahead">
+          <div class="score serif tnum">3.3</div>
+          <div class="t"><h3>Whether your emails reach the inbox</h3><div class="w">5% of overall score</div></div>
+          <div class="bar"><i style="width:33%"></i></div>
+        </div>
+        <div class="abody">
+          <table class="parts">
+            <tr><td class="p1">Sender permission record</td><td class="p2">Your domain publishes two conflicting permission records where the rules allow only one. Because both exist, neither counts, and mail servers treat the check as failed.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Delivery policy record</td><td class="p2">Missing entirely. There is no instruction telling inbox providers what to do with mail claiming to be from you, and no reporting on how much is being filtered.</td><td class="p3"><span class="chip tnum">1</span></td></tr>
+            <tr><td class="p1">Email signing</td><td class="p2">A signing key is in place through your email platform, which helps. It cannot compensate for the two issues above on its own.</td><td class="p3"><span class="chip tnum">6</span></td></tr>
+            <tr><td class="p1">Mail routing</td><td class="p2">Mail is routing through your host on an automatically generated setting rather than a deliberate one.</td><td class="p3"><span class="chip tnum">5</span></td></tr>
+          </table>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- KEYWORDS -->
+  <section>
+    <div class="shead">
+      <h2>Where you actually rank today</h2>
+      <span class="note">Live Google data, United States</span>
+    </div>
+    <p class="intro">This is the part that matters most, so we pulled it from live search data rather than
+      estimating it. Your entire website currently ranks for <b>24 keywords</b> in the United States.
+      For comparison, a healthy site of 682 pages in a coaching niche would normally rank for several
+      hundred. None of your 24 sit in the top three positions.</p>
+
+    <div class="tw" style="margin-bottom:26px">
+      <table class="kw">
+        <thead><tr><th>Search term</th><th style="text-align:right">Searches / month</th><th style="text-align:right">Your position</th><th>Who holds the top spot</th></tr></thead>
+        <tbody>
+          <tr><td>mindset coach</td><td class="n">1,900</td><td class="n">Not in top 20</td><td>mindsetcoachacademy.com</td></tr>
+          <tr><td>christian life coach</td><td class="n">1,300</td><td class="n">Not in top 20</td><td>centerforchristiancoaching.com</td></tr>
+          <tr><td>splankna</td><td class="n">1,300</td><td class="n">Not in top 20</td><td>splankna.com</td></tr>
+          <tr><td>business coach for women</td><td class="n">210</td><td class="n">Not in top 20</td><td>sarahwalton.com</td></tr>
+          <tr><td>christian business coach</td><td class="n">170</td><td class="n">Not in top 20</td><td>Coaching institutes and directories</td></tr>
+          <tr><td>faith based coaching</td><td class="n">140</td><td class="n">Not in top 20</td><td>Certification bodies</td></tr>
+          <tr><td><b>justina ford</b></td><td class="n"><b>480</b></td><td class="n"><b>Not in top 20</b></td><td>Wikipedia, for the Denver physician</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="intro"><b>Your own name is the finding to sit with.</b> "Justina Ford" is searched 480 times
+      a month, and every result on page one belongs to Dr. Justina Ford, Colorado's first Black woman
+      physician, through Wikipedia, hospital pages, museums and PBS. Someone who hears you on a podcast
+      and searches your name does not find you. That is a genuinely hard search result to win and it
+      shapes what a sensible plan looks like.</p>
+
+    <p class="intro"><b>The 24 keywords you do rank for are almost all accidental.</b> Nine of them are
+      variations of "blocking your blessings" from a single blog post. Five are about the word "anthology",
+      including position 10 for a term searched 5,400 times a month. None of the 24 describe coaching,
+      mindset work or hiring anyone. Your best commercial position is 31st, for "splankna therapy".</p>
+
+    <div class="shead" style="margin-top:44px">
+      <h2>How your words compare to other coaches</h2>
+      <span class="note">12 sites measured identically</span>
+    </div>
+    <p class="intro">Separately from rankings, we measured word-for-word how your pages read against
+      twelve other coaching websites, nine national and three in Georgia. Density is how often a phrase
+      appears as a share of the words on the page. One caveat worth stating plainly: most of these sites
+      do not rank for the commercial terms either, so treat this as a comparison of positioning rather
+      than a comparison of winners.</p>
+
+    <div class="tw">
+      <table class="kw">
+        <thead>
+          <tr><th>Phrase</th><th style="text-align:right">Your site</th><th style="text-align:right">Field average</th><th style="text-align:right">Highest in field</th><th>Reading</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>business coach</td><td class="n">0.024%</td><td class="n">0.117%</td><td class="n">0.516%</td><td><span class="tag t-gap">Well behind</span></td></tr>
+          <tr><td>faith based / faith-based</td><td class="n">0.000%</td><td class="n">0.000%</td><td class="n">0.456%</td><td><span class="tag t-gap">Absent</span></td></tr>
+          <tr><td>book a call</td><td class="n">0.000%</td><td class="n">0.000%</td><td class="n">0.387%</td><td><span class="tag t-gap">Absent</span></td></tr>
+          <tr><td>testimonial</td><td class="n">0.000%</td><td class="n">0.004%</td><td class="n">0.174%</td><td><span class="tag t-gap">Absent</span></td></tr>
+          <tr><td>women entrepreneurs</td><td class="n">0.048%</td><td class="n">0.000%</td><td class="n">0.437%</td><td><span class="tag t-gap">Well behind</span></td></tr>
+          <tr><td>business coaching</td><td class="n">0.024%</td><td class="n">0.007%</td><td class="n">0.430%</td><td><span class="tag t-par">Mid field</span></td></tr>
+          <tr><td>christian business</td><td class="n">0.097%</td><td class="n">0.000%</td><td class="n">0.403%</td><td><span class="tag t-par">Mid field</span></td></tr>
+          <tr><td>mindset coaching</td><td class="n">0.048%</td><td class="n">0.000%</td><td class="n">0.146%</td><td><span class="tag t-par">Mid field</span></td></tr>
+          <tr><td>money mindset</td><td class="n">0.218%</td><td class="n">0.000%</td><td class="n">0.873%</td><td><span class="tag t-par">Above average</span></td></tr>
+          <tr><td>mindset coach</td><td class="n">0.145%</td><td class="n">0.000%</td><td class="n">0.159%</td><td><span class="tag t-lead">Near the top</span></td></tr>
+          <tr><td>god</td><td class="n">0.472%</td><td class="n">0.188%</td><td class="n">1.111%</td><td><span class="tag t-lead">Well above average</span></td></tr>
+          <tr><td>limiting beliefs</td><td class="n">0.048%</td><td class="n">0.000%</td><td class="n">0.008%</td><td><span class="tag t-lead">You lead</span></td></tr>
+          <tr><td>podcast</td><td class="n">0.169%</td><td class="n">0.002%</td><td class="n">0.164%</td><td><span class="tag t-lead">You lead</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="intro" style="margin-top:22px">Read together, those two blocks tell one story. The words that
+      make you <em>you</em>, faith, money mindset, healing and limiting beliefs, are where you already beat
+      the field. The words people type when they are ready to pay someone, and the words that ask them to
+      book, are where you are close to silent. You are winning the conversation you are having and missing
+      the one your buyer is having.</p>
+
+    <div class="tw" style="margin-top:20px">
+      <table class="kw">
+        <thead><tr><th>Words on the pages that sell</th><th style="text-align:right">Words per page</th><th>Position</th></tr></thead>
+        <tbody>
+          <tr><td>Hart to Heart Consulting</td><td class="n">6,320</td><td><span class="tag t-lead">Field leader</span></td></tr>
+          <tr><td>Erin Harrigan</td><td class="n">5,399</td><td><span class="tag t-lead">Top tier</span></td></tr>
+          <tr><td>Conscious Creating, Atlanta</td><td class="n">4,779</td><td><span class="tag t-lead">Top tier</span></td></tr>
+          <tr><td>Ashley June Co</td><td class="n">3,519</td><td><span class="tag t-lead">Top tier</span></td></tr>
+          <tr><td><b>Your site</b></td><td class="n"><b>1,652</b></td><td><span class="tag t-par">Field average is 1,720</span></td></tr>
+          <tr><td>Fun Money Habits</td><td class="n">1,374</td><td><span class="tag t-par">Below average</span></td></tr>
+          <tr><td>Oh-So-You Coaching, Atlanta</td><td class="n">820</td><td><span class="tag t-gap">Thin</span></td></tr>
+          <tr><td>1st Principle Group, Atlanta</td><td class="n">540</td><td><span class="tag t-gap">Thin</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="intro" style="margin-top:18px">On sheer volume of copy you are exactly average for the field.
+      That is better than it sounds, because it means you do not have a writing problem. Your service pages
+      are the thin ones: the page selling your coaching carries 226 words while your blog posts routinely
+      run past 800.</p>
+
+    <div class="shead" style="margin-top:44px">
+      <h2>One opening worth naming</h2>
+      <span class="note">Measured, not guessed</span>
+    </div>
+    <p class="intro">"Splankna" draws <b>1,300 searches a month</b> nationally with almost no advertising
+      competition. You are a Certified Splankna Practitioner, you already rank 31st for "splankna therapy",
+      and the current top ten is made up largely of small independent sites and ministry pages rather than
+      large brands. It is the one term in this whole review where your credentials, your existing content
+      and a weak field line up at the same time.</p>
+    <p class="intro">Worth knowing for planning: Georgia on its own is not a market for this work. The same
+      terms draw 10 searches a month or fewer inside the state, against 1,900 nationally. Your audience is
+      national and online, and the data supports treating it that way.</p>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>The authority behind the site</h2>
+      <span class="note">Backlinks and citations</span>
+    </div>
+    <p class="intro">Links from other websites are how Google decides whether to trust a site enough to
+      rank it. We pulled your full link profile and compared it to the sites currently holding the results
+      you want. What came back is genuinely surprising, and it is mostly good news.</p>
+
+    <div class="tw" style="margin-bottom:26px">
+      <table class="kw">
+        <thead><tr><th>Measure</th><th style="text-align:right">Your site</th><th>What it means</th></tr></thead>
+        <tbody>
+          <tr><td>Websites linking to you</td><td class="n">57</td><td>Modest but not empty</td></tr>
+          <tr><td>Total links</td><td class="n">128</td><td>Concentrated in a few sources</td></tr>
+          <tr><td>Of those 57, how many carry any authority</td><td class="n">6</td><td><span class="tag t-gap">48 are worth nothing</span></td></tr>
+          <tr><td>Scraper, spam and link-shortener sites</td><td class="n">19</td><td><span class="tag t-gap">A third of your profile</span></td></tr>
+          <tr><td>Spam score</td><td class="n">22</td><td>Elevated, not dangerous</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="intro"><b>The single biggest miss on the whole site.</b> You are a HuffPost contributor, a
+      number one Amazon bestselling author, the host of an active 85-episode podcast and a Master Certified
+      Splankna Practitioner. <b>Not one of those links back to you.</b> There is nothing from HuffPost, Amazon,
+      Apple Podcasts, Spotify, Podchaser, LinkedIn or the Splankna Institute among the sites linking to
+      your website. You did the hard part, which is earning the credentials. None of the credit reached
+      the site. That is not an outreach campaign, it is claiming something you already own.</p>
+
+    <p class="intro"><b>Now the good news.</b> You are not short on authority compared to the people
+      beating you. Your site scores 183 on the industry authority scale. The site sitting at number one
+      for "mindset coach", a term searched 1,900 times a month, scores 169. The site at number one for
+      "christian life coach" scores 153. They are not outranking you because they are stronger. They are
+      outranking you because their websites are readable, connected and measurable, and yours is not
+      yet.</p>
+
+    <div class="tw" style="margin-bottom:22px">
+      <table class="kw">
+        <thead><tr><th>Site</th><th style="text-align:right">Authority score</th><th style="text-align:right">Sites linking to it</th><th>Currently ranks number one for</th></tr></thead>
+        <tbody>
+          <tr><td><b>Your site</b></td><td class="n"><b>183</b></td><td class="n"><b>57</b></td><td>Nothing</td></tr>
+          <tr><td>mindsetcoachacademy.com</td><td class="n">169</td><td class="n">393</td><td>"mindset coach", 1,900/mo</td></tr>
+          <tr><td>centerforchristiancoaching.com</td><td class="n">153</td><td class="n">54</td><td>"christian life coach", 1,300/mo</td></tr>
+          <tr><td>gracespacechristiancoaching.com</td><td class="n">147</td><td class="n">115</td><td>Page one, several terms</td></tr>
+          <tr><td>paigeschmidt.com</td><td class="n">141</td><td class="n">129</td><td>Page one, several terms</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="intro"><b>Which makes the Splankna opening concrete rather than hopeful.</b> On that search
+      result, your site already has more websites linking to it than five of the seven pages currently
+      ranking, including pastorlamb.com, lifesourcecoaches.com and healingroses.com. Only the Splankna
+      Institute itself and one Denver practice are stronger. You could compete for those 1,300 monthly
+      searches on the authority you have today, without building a single new link. Separately, the
+      Splankna Institute runs a public certified-practitioner directory, and your site does not appear
+      anywhere in its links.</p>
+
+    <p class="intro"><b>On citations.</b> Your site lists no address, no phone number and no business
+      details in the format directories read, so there is effectively no local listing footprint. For a
+      national online practice that matters less than it sounds, and the Georgia search data supports
+      leaving it that way. The listings that would help are the ones tied to your professional identity
+      rather than a location. One thing worth resolving first: the two directory listings that do exist
+      name the business differently, as J. Ford Creative Consulting in one place and JustinaFord in
+      another, while the site says Soulfully Aligned You and older pages say The J. Ford Beauty Agency.
+      Four names for one business is worth settling before anything is submitted anywhere.</p>
+  </section>
+
+  <!-- WINS -->
+  <section>
+    <div class="shead">
+      <h2>What is already working</h2>
+      <span class="note">Confirmed by measurement</span>
+    </div>
+    <p class="intro">This matters as much as the scores above. Nothing here needs to be rebuilt from
+      scratch, and several of these are things competitors are getting wrong.</p>
+    <div class="wins">
+      <div class="win"><div class="t">Not one broken page</div><div class="d">All 682 pages load correctly. No error pages, no dead links in your sitemap. That is rare at this size.</div></div>
+      <div class="win"><div class="t">WordPress is fully current</div><div class="d">Core software is up to date and updating itself. Many sites we review are years behind.</div></div>
+      <div class="win"><div class="t">Google is not blocked</div><div class="d">Every major search engine can reach your site normally. Nothing is being accidentally hidden at the server.</div></div>
+      <div class="win"><div class="t">The padlock is correct</div><div class="d">Secure certificate valid and current, and visitors are always routed to the secure address.</div></div>
+      <div class="win"><div class="t">Your SEO plugin is set up well</div><div class="d">Yoast is producing correct addresses and sitemaps across all 682 pages, with a single exception.</div></div>
+      <div class="win"><div class="t">Real depth in the writing</div><div class="d">227 pages run past 800 words with distinctive, personal content. This is the asset everything else protects.</div></div>
+      <div class="win"><div class="t">Page caching is live</div><div class="d">Your server answers in about 0.2 seconds. The speed problem is images, not hosting.</div></div>
+      <div class="win"><div class="t">Genuine authority off-site</div><div class="d">A ranking podcast, an active LinkedIn, a published book and real certifications. Most competitors have less.</div></div>
+      <div class="win"><div class="t">Distinctive positioning</div><div class="d">You measurably out-write the entire field on faith, money mindset and inner healing. That is your moat.</div></div>
+      <div class="win"><div class="t">Enough authority to compete</div><div class="d">Your site scores higher for authority than the sites ranking number one for your two biggest target terms.</div></div>
+      <div class="win"><div class="t">A clear, winnable opening</div><div class="d">On "splankna", 1,300 searches a month, you already out-link five of the seven pages currently ranking.</div></div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section>
+    <div class="shead">
+      <h2>What we would do next</h2>
+      <span class="note">In this order</span>
+    </div>
+    <p class="intro">Sequenced by what each step depends on, not by how quick it is.</p>
+    <div class="steps">
+      <div class="step"><div><p class="sc-t">Turn measurement on and secure the basics</p><p>Connect analytics so every change after this can be judged on results rather than opinion, fix the email records so your list reaches the inbox, and close the file and account exposure.</p></div></div>
+      <div class="step"><div><p class="sc-t">Make the site fast and stable on a phone</p><p>Address the image weight and the layout jumping, which together account for the two worst scores in this report and affect every visitor you have.</p></div></div>
+      <div class="step"><div><p class="sc-t">Reconnect the site to itself and decide what stays</p><p>Bring the orphaned pages, the contact page and the podcast page back into the structure, and settle what happens to the 187 pages from the beauty agency era.</p></div></div>
+      <div class="step"><div><p class="sc-t">Pick the ground you can win and claim your authority</p><p>Settle how you want to handle a name that Google gives to someone else, build on the openings where your credentials and the search demand already line up, make your podcast and profiles readable by search engines, then re-run this exact report at 30, 60 and 90 days to show movement.</p></div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap fin">
+    <div class="legend">
+      <span class="lg"><span class="sw" style="background:var(--s-low)"></span>1 to 3 &nbsp;Needs attention</span>
+      <span class="lg"><span class="sw" style="background:var(--s-mid)"></span>4 to 5 &nbsp;Below par</span>
+      <span class="lg"><span class="sw" style="background:var(--s-fair)"></span>6 to 7 &nbsp;Fair</span>
+      <span class="lg"><span class="sw" style="background:var(--s-high)"></span>8 to 10 &nbsp;Strong</span>
+    </div>
+    <p><b>How this was measured.</b> Every page listed in your sitemap was crawled and analyzed, 682 in
+      total, alongside a separate crawl that followed links from your homepage to find pages nothing links
+      to. Speed and stability were measured in a real browser on a simulated phone and 4G connection.
+      Domain, email and security records were read live. The competitor comparison crawled the same five
+      pages on each of twelve coaching websites appearing in search results for your core terms, nine
+      national and three in Georgia, and measured all of them identically.</p>
+    <p><b>Ranking and search volume data.</b> Keyword positions, monthly search volumes and the top-ten
+      results shown here were pulled live from Google search data on 18 August 2026 through DataForSEO,
+      for the United States and separately for Georgia. They are measurements taken on the day, not
+      estimates, and rankings do move.</p>
+    <p><b>Link and authority data.</b> The full backlink profile, authority scores and competitor
+      comparison were pulled live on 19 August 2026 through DataForSEO, covering live links only.
+      Authority scores are on a 0 to 1000 scale and are directional rather than absolute.</p>
+    <p><b>What is not included.</b> Historic traffic could not be reviewed because, as covered in the
+      first area, no analytics account is connected to collect it.</p>
+    <p><b>Security detail.</b> This is a public page, so the security findings above are described by
+      category rather than in detail. Publishing the specifics of an unresolved issue on a live website
+      would make it easier to exploit. The full detail, including the access control point, has been sent
+      to you privately and should be treated as confidential until it is resolved.</p>
+    <p><b>Reviewed:</b> justinaford.com &nbsp;&middot;&nbsp; 682 pages &nbsp;&middot;&nbsp; 18 August 2026</p>
+  </div>
+</footer>
